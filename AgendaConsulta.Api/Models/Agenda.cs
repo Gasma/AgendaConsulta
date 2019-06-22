@@ -14,6 +14,7 @@ namespace AgendaConsulta.Api.Models
         public DateTime InicioConsulta { get; set; }
         public DateTime TerminoConsulta { get; set; }
         public string Observacao { get; set; }
-        public string DuracaoConsulta { get; set; }
+        [Required]
+        public string Paciente { get; set; }
     }
 }
