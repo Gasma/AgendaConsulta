@@ -1,0 +1,12 @@
+<form #form="ngForm" autocomplete="off">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text bg-white">
+          <i class="fas fa-user-circle"></i>
+        </div>
+      </div>
+      <input type="text" name="Paciente" #Paciente="ngModel" [(ngModel)]="service.formData.Paciente" class="form-control" placeholder="Nome do Paciente">
+    </div>
+  </div>
+</form>
