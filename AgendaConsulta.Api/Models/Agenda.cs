@@ -12,6 +12,7 @@ namespace AgendaConsulta.Api.Models
         public int AgendaId { get; set; }
         [Required]
         public DateTime InicioConsulta { get; set; }
+        public DateTime Nascimento { get; set; }
         public DateTime TerminoConsulta { get; set; }
         public string Observacao { get; set; }
         [Required]
