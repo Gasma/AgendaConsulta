@@ -4,4 +4,5 @@ export class Agenda {
   TerminoConsulta: Date;
   Observacao: string;
   Paciente: string;
+  Nascimento: Date;
 }

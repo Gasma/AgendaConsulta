@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AgendaService } from '../shared/agenda.service';
 
 @Component({
   selector: 'app-agenda',
@@ -8,7 +7,7 @@ import { AgendaService } from '../shared/agenda.service';
 })
 export class AgendaComponent implements OnInit {
 
-  constructor(private service: AgendaService) { }
+  constructor() { }
 
   ngOnInit() {
   }

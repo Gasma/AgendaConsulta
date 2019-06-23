@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { InputMaskModule } from 'racoon-mask-raw';
 
 import { AppComponent } from './app.component';
 import { NovaConsultaComponent } from './agenda/nova-consulta/nova-consulta.component';
@@ -19,7 +20,8 @@ import { AgendaService } from './shared/agenda.service';
   imports: [
     BrowserModule,
     FormsModule,
-    NgbModule
+    HttpClientModule,
+    InputMaskModule
   ],
   providers: [AgendaService],
   bootstrap: [AppComponent]
