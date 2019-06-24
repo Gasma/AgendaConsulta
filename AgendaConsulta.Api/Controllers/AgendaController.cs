@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AgendaConsulta.Api.Models;
+using AgendaConsulta.Api.Services;
 
 namespace AgendaConsulta.Api.Controllers
 {
@@ -13,93 +13,61 @@ namespace AgendaConsulta.Api.Controllers
     [ApiController]
     public class AgendaController : ControllerBase
     {
-        private readonly AgendaContext _context;
+        private readonly AgendaService _service;
 
-        public AgendaController(AgendaContext context)
+        public AgendaController(AgendaService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/Agenda
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Agenda>>> GetAgenda()
+        public ActionResult<IEnumerable<Agenda>> GetAgenda()
         {
-            return await _context.Agenda.ToListAsync();
+            return _service.GetAgenda().ToList();
         }
 
         // GET: api/Agenda/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Agenda>> GetAgenda(int id)
+        public ActionResult<Agenda> GetAgenda(int id)
         {
-            var agenda = await _context.Agenda.FindAsync(id);
+            var agenda = _service.GetAgenda(id);
 
             if (agenda == null)
             {
-                return NotFound();
+                return StatusCode(404);
             }
-
             return agenda;
         }
 
         // PUT: api/Agenda/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgenda(int id, Agenda agenda)
+        public IActionResult PutAgenda(int id, Agenda agenda)
         {
-            if (id != agenda.AgendaId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(agenda).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AgendaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            _service.PutAgenda(id, agenda);
+            if (_service.Invalido)
+                return StatusCode(404, _service.Notificacoes.Select(m => new { erros = m.Mensagem }));
             return NoContent();
         }
 
         // POST: api/Agenda
         [HttpPost]
-        public async Task<ActionResult<Agenda>> PostAgenda(Agenda agenda)
+        public IActionResult PostAgenda(Agenda agenda)
         {
-            _context.Agenda.Add(agenda);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAgenda", new { id = agenda.AgendaId }, agenda);
+            _service.PostAgenda(agenda);
+            if (_service.Invalido)
+                StatusCode(401, _service.Notificacoes.Select(m => new { erros = m.Mensagem }));
+            return NoContent();
         }
 
         // DELETE: api/Agenda/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Agenda>> DeleteAgenda(int id)
+        public IActionResult DeleteAgenda(int id)
         {
-            var agenda = await _context.Agenda.FindAsync(id);
-            if (agenda == null)
-            {
-                return NotFound();
-            }
-
-            _context.Agenda.Remove(agenda);
-            await _context.SaveChangesAsync();
-
-            return agenda;
-        }
-
-        private bool AgendaExists(int id)
-        {
-            return _context.Agenda.Any(e => e.AgendaId == id);
+            _service.DeleteAgenda(id);
+            if (_service.Invalido)
+                StatusCode(402, _service.Notificacoes.Select(m => new { erros = m.Mensagem }));
+            return NoContent();
         }
     }
 }
