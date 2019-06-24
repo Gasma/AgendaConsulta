@@ -1,31 +1,31 @@
 <h5>Marcação de Consultas</h5>
 <hr>
 <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-  <input type="hidden" name="AgendaId" [value]="service.AgendaId">
+  <input type="hidden" name="AgendaId" [value]="service.formData.AgendaId">
   <div class="form-group row">
     <div class="col-sm-7">
       <label class="control-label">Paciente:</label>
-      <input type="text" name="Paciente" #Paciente="ngModel" [(ngModel)]="service.Paciente" class="form-control" placeholder="Nome do Paciente">
+      <input type="text" name="Paciente" #Paciente="ngModel" [(ngModel)]="service.formData.Paciente" class="form-control" placeholder="Nome do Paciente">
     </div>
     <div class="col-sm-5">
       <label class="control-label">Nascimento:</label>
-      <input type="text" name="Nascimento" rInputMask="99/99/9999" #Nascimento="ngModel" [(ngModel)]="service.Nascimento" class="form-control" placeholder="Data de Nascimento">
+      <input type="datetime-local" name="Nascimento" rInputMask="99/99/9999" #Nascimento="ngModel" [(ngModel)]="service.formData.Nascimento" class="form-control" placeholder="Data de Nascimento">
     </div>
   </div>
   <div class="form-group row">
     <div class="col-sm-6">
       <label class="control-label">Horário da Consulta:</label>
-      <input type="text" name="InicioConsulta" class="form-control" placeholder="Digite data e hora da consulta" [(ngModel)]="service.InicioConsulta" rInputMask="99/99/9999 99:99" #InicioConsulta="ngModel">
+      <input type="datetime-local" name="InicioConsulta" class="form-control" placeholder="Digite data e hora da consulta" [(ngModel)]="service.formData.InicioConsulta" #InicioConsulta="ngModel">
     </div>
     <div class="col-sm-6">
       <label class="control-label">Fim da Consulta:</label>
-      <input type="text" name="TerminoConsulta" class="form-control" placeholder="Data hora final da consulta" [(ngModel)]="service.TerminoConsulta" rInputMask="99/99/9999 99:99" #TerminoConsulta="ngModel">
+      <input type="datetime-local" name="TerminoConsulta" class="form-control" placeholder="Data hora final da consulta" [(ngModel)]="service.formData.TerminoConsulta" #TerminoConsulta="ngModel">
     </div>
   </div>
   <div class="form-group row">
     <div class="col-sm-12">
       <label class="control-label">Observação:</label>
-      <input type="text" name="Observacao" class="form-control" placeholder="Observações sobre essa consulta" [(ngModel)]="service.Observacao" #Observacao="ngModel">
+      <input type="text" name="Observacao" class="form-control" placeholder="Observações sobre essa consulta" [(ngModel)]="service.formData.Observacao" #Observacao="ngModel">
     </div>
   </div>
   <div class="form-group">

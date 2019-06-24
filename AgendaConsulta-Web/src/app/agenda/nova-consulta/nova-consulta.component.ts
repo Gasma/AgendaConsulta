@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AgendaService } from 'src/app/shared/agenda.service';
 import { NgForm } from '@angular/forms';
-import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nova-consulta',
@@ -10,7 +10,7 @@ import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expr
 })
 export class NovaConsultaComponent implements OnInit {
 
-  constructor(private service: AgendaService) { }
+  constructor(private service: AgendaService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.resetForm();
@@ -21,26 +21,35 @@ export class NovaConsultaComponent implements OnInit {
       form.resetForm();
     }
     this.service.formData = {
-        AgendaId: 0,
-        Paciente: '',
-        InicioConsulta: null,
-        Observacao: '',
-        TerminoConsulta: null,
-        Nascimento: null,
+      AgendaId: 0,
+      Paciente: '',
+      InicioConsulta: null,
+      Observacao: '',
+      TerminoConsulta: null,
+      Nascimento: null,
     };
   }
-
-  ConvertData(form: NgForm) {
-    // InicioConsulta = new Date(InicioConsulta);
+  validateDates(form: NgForm) {
+    const agenda = {
+      AgendaId: form.value.AgendaId,
+      Paciente: form.value.Paciente,
+      InicioConsulta: new Date(form.value.InicioConsulta),
+      TerminoConsulta: new Date(form.value.TerminoConsulta),
+      Nascimento: new Date(form.value.Nascimento),
+      Observacao: form.value.Observacao
+    };
+    return agenda;
   }
   onSubmit(form: NgForm) {
-    this.ConvertData(form);
-    this.service.postAgenda(form.value).subscribe(
+    const body = this.validateDates(form);
+    this.service.postAgenda(body).subscribe(
       res => {
         this.resetForm(form);
+        this.toastr.success('Consulta marcada com sucesso.', 'Agenda Consulta');
       },
       err => {
         console.log(err);
+        this.toastr.error('.', 'Agenda Consulta');
       }
     );
   }

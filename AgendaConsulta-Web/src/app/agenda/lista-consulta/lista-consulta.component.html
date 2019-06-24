@@ -1,3 +1,21 @@
-<p>
-  lista-consulta works!
-</p>
+<h5>Consultas Marcadas</h5>
+<div class="dt-responsive">
+  <table class="table table-hover">
+    <thead>
+      <th>Paciente</th>
+      <th>Nascimento</th>
+      <th>Inicio</th>
+      <th>Fim</th>
+      <th>Observação</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pd of service.list">
+        <td (click)="populateForm(pd)">{{ pd.Paciente }}</td>
+        <td (click)="populateForm(pd)">{{ pd.Nascimento | date: 'dd/MM/yyyy' }}</td>
+        <td (click)="populateForm(pd)">{{ pd.InicioConsulta  | date: 'dd/MM/yyyy h:mm' }}</td>
+        <td (click)="populateForm(pd)">{{ pd.TerminoConsulta  | date: 'dd/MM/yyyy h:mm' }}</td>
+        <td (click)="populateForm(pd)">{{ pd.Observacao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
