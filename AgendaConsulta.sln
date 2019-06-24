@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaConsulta.Api", "AgendaConsulta.Api\AgendaConsulta.Api.csproj", "{6B81B28A-B866-435C-B198-81C8B65D344F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaConsulta.Api", "AgendaConsulta.Api\AgendaConsulta.Api.csproj", "{6B81B28A-B866-435C-B198-81C8B65D344F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaConsultaTest", "AgendaConsultaTest\AgendaConsultaTest.csproj", "{C52CAEB2-9385-4394-8DDF-0D55C6C53F0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6B81B28A-B866-435C-B198-81C8B65D344F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B81B28A-B866-435C-B198-81C8B65D344F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B81B28A-B866-435C-B198-81C8B65D344F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C52CAEB2-9385-4394-8DDF-0D55C6C53F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C52CAEB2-9385-4394-8DDF-0D55C6C53F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C52CAEB2-9385-4394-8DDF-0D55C6C53F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C52CAEB2-9385-4394-8DDF-0D55C6C53F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
