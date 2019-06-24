@@ -29,10 +29,15 @@ export class NovaConsultaComponent implements OnInit {
 
   onSubmit() {
     this.service.saveAgenda().subscribe(
-      res => {
-        this.resetForm();
-        this.toastr.success('A Consulta foi salva com sucesso.', 'Agenda Consulta');
-        this.service.refreshList();
+      response => {
+        if (response.status === 200) {
+          this.resetForm();
+          this.toastr.success('A Consulta foi salva com sucesso.', 'Agenda Consulta');
+          this.service.refreshList();
+        }
+        if (response.status === 404) {
+          this.toastr.warning('Erro ao marcar essa consulta, verifique se já existe uma consulta nesse horário.', 'Agenda Consulta');
+        }
       },
       err => {
         console.log(err);

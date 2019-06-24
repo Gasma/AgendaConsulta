@@ -26,15 +26,15 @@ export class AgendaService {
     }
   }
   private postAgenda() {
-    return this.http.post(this.rootURL + '/Agenda', this.formData);
+    return this.http.post(this.rootURL + '/Agenda', this.formData, { observe: 'response' });
   }
 
   private putAgenda() {
-    return this.http.put(this.rootURL + '/Agenda/' + this.formData.AgendaId, this.formData);
+    return this.http.put(this.rootURL + '/Agenda/' + this.formData.AgendaId, this.formData, { observe: 'response' });
   }
 
   deleteAgenda(AgendaId) {
-    return this.http.delete(this.rootURL + '/Agenda/' + AgendaId);
+    return this.http.delete(this.rootURL + '/Agenda/' + AgendaId, { observe: 'response' });
   }
 
   refreshList() {

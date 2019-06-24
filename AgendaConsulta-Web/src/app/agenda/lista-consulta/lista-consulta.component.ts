@@ -21,9 +21,11 @@ export class ListaConsultaComponent implements OnInit {
   onDelete(AgendaId: any) {
     if (confirm('Deseja excluir o registro? Essa operação não pode ser revertida.')) {
       this.service.deleteAgenda(AgendaId).subscribe(
-        res => {
-          this.toastr.warning('Excluido com sucesso.', 'Agenda Consulta');
-          this.service.refreshList();
+        response => {
+          if (response.status === 200) {
+            this.toastr.warning('Excluido com sucesso.', 'Agenda Consulta');
+            this.service.refreshList();
+          }
         },
         err => {
           console.log(err);
