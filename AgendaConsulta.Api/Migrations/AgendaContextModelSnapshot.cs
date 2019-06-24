@@ -27,7 +27,8 @@ namespace AgendaConsulta.Api.Migrations
 
                     b.Property<DateTime>("InicioConsulta");
 
-                    b.Property<DateTime>("Nascimento");
+                    b.Property<DateTime>("Nascimento")
+                        .HasColumnType("Date");
 
                     b.Property<string>("Observacao");
 

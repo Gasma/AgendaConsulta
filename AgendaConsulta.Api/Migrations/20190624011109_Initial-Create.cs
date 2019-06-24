@@ -15,9 +15,10 @@ namespace AgendaConsulta.Api.Migrations
                     AgendaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     InicioConsulta = table.Column<DateTime>(nullable: false),
+                    Nascimento = table.Column<DateTime>(type: "Date", nullable: false),
                     TerminoConsulta = table.Column<DateTime>(nullable: false),
                     Observacao = table.Column<string>(nullable: true),
-                    DuracaoConsulta = table.Column<string>(nullable: true)
+                    Paciente = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

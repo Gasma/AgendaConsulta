@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AgendaConsulta.Api.Migrations
 {
     [DbContext(typeof(AgendaContext))]
-    [Migration("20190623150434_AddNascimentoAgenda")]
-    partial class AddNascimentoAgenda
+    [Migration("20190624011109_Initial-Create")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,8 @@ namespace AgendaConsulta.Api.Migrations
 
                     b.Property<DateTime>("InicioConsulta");
 
-                    b.Property<DateTime>("Nascimento");
+                    b.Property<DateTime>("Nascimento")
+                        .HasColumnType("Date");
 
                     b.Property<string>("Observacao");
 
