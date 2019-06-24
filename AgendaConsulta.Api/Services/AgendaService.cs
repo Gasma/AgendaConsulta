@@ -79,6 +79,7 @@ namespace AgendaConsulta.Api.Services
             if (agenda == null)
             {
                 this.AdicionarNotificacao("Registro informado não existe");
+                return;
             }
             try
             {
@@ -103,6 +104,17 @@ namespace AgendaConsulta.Api.Services
         private bool AgendaExists(int id)
         {
             return _context.Agenda.Any(e => e.AgendaId == id);
+        }
+        public string GetNotificacoes()
+        {
+            if (!Invalido)
+                return "";
+            string str = "";
+            foreach (var item in Notificacoes)
+            {
+                str += item.Mensagem + " | ";
+            }
+            return str;
         }
     }
 }

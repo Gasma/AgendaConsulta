@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AgendaConsulta.Api.Models;
 using AgendaConsulta.Api.Services;
+using System.Net.Http;
+using System.Net;
 
 namespace AgendaConsulta.Api.Controllers
 {
@@ -35,7 +37,7 @@ namespace AgendaConsulta.Api.Controllers
 
             if (agenda == null)
             {
-                return StatusCode(404);
+                return NotFound();
             }
             return agenda;
         }
@@ -46,8 +48,8 @@ namespace AgendaConsulta.Api.Controllers
         {
             _service.PutAgenda(id, agenda);
             if (_service.Invalido)
-                return StatusCode(404, _service.Notificacoes.Select(m => new { erros = m.Mensagem }));
-            return NoContent();
+                return NotFound();
+            return Ok();
         }
 
         // POST: api/Agenda
@@ -56,8 +58,8 @@ namespace AgendaConsulta.Api.Controllers
         {
             _service.PostAgenda(agenda);
             if (_service.Invalido)
-                StatusCode(401, _service.Notificacoes.Select(m => new { erros = m.Mensagem }));
-            return NoContent();
+                return NotFound();
+            return Ok();
         }
 
         // DELETE: api/Agenda/5
@@ -66,8 +68,8 @@ namespace AgendaConsulta.Api.Controllers
         {
             _service.DeleteAgenda(id);
             if (_service.Invalido)
-                StatusCode(402, _service.Notificacoes.Select(m => new { erros = m.Mensagem }));
-            return NoContent();
+                return NotFound();
+            return Ok();
         }
     }
 }
