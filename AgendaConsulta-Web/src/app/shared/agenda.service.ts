@@ -12,9 +12,29 @@ export class AgendaService {
   constructor(private http: HttpClient) {
 
   }
+  validateDates() {
+    this.formData.InicioConsulta = new Date(this.formData.InicioConsulta);
+    this.formData.TerminoConsulta = new Date(this.formData.TerminoConsulta);
+    this.formData.Nascimento = new Date(this.formData.Nascimento);
+  }
 
-  postAgenda(formData: Agenda) {
-    return this.http.post(this.rootURL + '/Agenda', formData);
+  saveAgenda() {
+    if (this.formData.AgendaId === 0) {
+      return this.postAgenda();
+    } else {
+      return this.putAgenda();
+    }
+  }
+  private postAgenda() {
+    return this.http.post(this.rootURL + '/Agenda', this.formData);
+  }
+
+  private putAgenda() {
+    return this.http.put(this.rootURL + '/Agenda/' + this.formData.AgendaId, this.formData);
+  }
+
+  deleteAgenda(AgendaId) {
+    return this.http.delete(this.rootURL + '/Agenda/' + AgendaId);
   }
 
   refreshList() {

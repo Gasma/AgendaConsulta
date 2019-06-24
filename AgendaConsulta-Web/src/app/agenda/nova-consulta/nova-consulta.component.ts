@@ -16,10 +16,7 @@ export class NovaConsultaComponent implements OnInit {
     this.resetForm();
   }
 
-  resetForm(form?: NgForm) {
-    if (form != null) {
-      form.resetForm();
-    }
+  resetForm() {
     this.service.formData = {
       AgendaId: 0,
       Paciente: '',
@@ -29,23 +26,13 @@ export class NovaConsultaComponent implements OnInit {
       Nascimento: null,
     };
   }
-  validateDates(form: NgForm) {
-    const agenda = {
-      AgendaId: form.value.AgendaId,
-      Paciente: form.value.Paciente,
-      InicioConsulta: new Date(form.value.InicioConsulta),
-      TerminoConsulta: new Date(form.value.TerminoConsulta),
-      Nascimento: new Date(form.value.Nascimento),
-      Observacao: form.value.Observacao
-    };
-    return agenda;
-  }
-  onSubmit(form: NgForm) {
-    const body = this.validateDates(form);
-    this.service.postAgenda(body).subscribe(
+
+  onSubmit() {
+    this.service.saveAgenda().subscribe(
       res => {
-        this.resetForm(form);
-        this.toastr.success('Consulta marcada com sucesso.', 'Agenda Consulta');
+        this.resetForm();
+        this.toastr.success('A Consulta foi salva com sucesso.', 'Agenda Consulta');
+        this.service.refreshList();
       },
       err => {
         console.log(err);

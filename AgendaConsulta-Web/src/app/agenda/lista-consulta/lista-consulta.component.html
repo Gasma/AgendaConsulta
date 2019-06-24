@@ -7,6 +7,7 @@
       <th>Inicio</th>
       <th>Fim</th>
       <th>Observação</th>
+      <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let pd of service.list">
@@ -15,6 +16,7 @@
         <td (click)="populateForm(pd)">{{ pd.InicioConsulta  | date: 'dd/MM/yyyy h:mm' }}</td>
         <td (click)="populateForm(pd)">{{ pd.TerminoConsulta  | date: 'dd/MM/yyyy h:mm' }}</td>
         <td (click)="populateForm(pd)">{{ pd.Observacao }}</td>
+        <td ><i class="far fa-trash-alt fa-lg" (click)="onDelete(pd.AgendaId)"></i></td>
       </tr>
     </tbody>
   </table>
