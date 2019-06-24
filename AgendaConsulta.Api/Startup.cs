@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AgendaConsulta.Api.Models;
+using AgendaConsulta.Api.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +38,7 @@ namespace AgendaConsulta.Api
             services.AddDbContext<AgendaContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
             services.AddCors();
+            services.AddScoped<AgendaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

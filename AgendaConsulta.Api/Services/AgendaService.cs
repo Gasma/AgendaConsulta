@@ -94,9 +94,10 @@ namespace AgendaConsulta.Api.Services
         private bool ConflitoHorario(Agenda agenda)
         {
             var result = _context.Agenda
-                .Where(a => a.InicioConsulta < agenda.InicioConsulta && a.TerminoConsulta > agenda.InicioConsulta)
+                .Where(a => a.InicioConsulta < agenda.InicioConsulta && a.TerminoConsulta > agenda.InicioConsulta);
+            var result2 = _context.Agenda
                 .Where(a => a.InicioConsulta < agenda.TerminoConsulta && a.TerminoConsulta > agenda.TerminoConsulta);
-            return result == null;
+            return (result.Count() + result2.Count()) > 0 ? true: false;
         }
 
         private bool AgendaExists(int id)
